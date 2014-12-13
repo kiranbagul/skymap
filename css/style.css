@@ -1,0 +1,222 @@
+.ui-timepicker-div .ui-widget-header {
+    margin-bottom: 8px;
+}
+.ui-timepicker-div dl {
+    text-align: left;
+}
+.ui-timepicker-div dl dt {
+    float: left;
+    clear: left;
+    padding: 0 0 0 5px;
+}
+.ui-timepicker-div dl dd {
+    margin: 0 10px 10px 40%;
+}
+.ui-timepicker-div td {
+    font-size: 90%;
+}
+.ui-tpicker-grid-label {
+    background: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+.ui-timepicker-rtl {
+    direction: rtl;
+}
+.ui-timepicker-rtl dl {
+    text-align: right;
+    padding: 0 5px 0 0;
+}
+.ui-timepicker-rtl dl dt {
+    float: right;
+    clear: right;
+}
+.ui-timepicker-rtl dl dd {
+    margin: 0 40% 10px 10px;
+}
+#dateSelector {
+    float: right;
+}
+#content {
+    padding: 40px;
+}
+#sky {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.31);
+    overflow: hidden;
+}
+#moonPhaseImage,
+#moonPhaseDate {
+    margin-left: auto;
+    margin-right: auto;
+}
+.moon0,
+.moon29 {
+    background: url('../img/moonphases.jpg') no-repeat 1px -25px;
+    width: 125px;
+    height: 109px;
+}
+.moon1 {
+    background: url('../img/moonphases.jpg') no-repeat -120px -25px;
+    width: 125px;
+    height: 109px;
+}
+.moon2 {
+    background: url('../img/moonphases.jpg') no-repeat -240px -25px;
+    width: 125px;
+    height: 109px;
+}
+.moon3 {
+    background: url('../img/moonphases.jpg') no-repeat -360px -25px;
+    width: 125px;
+    height: 109px;
+}
+.moon4 {
+    background: url('../img/moonphases.jpg') no-repeat -480px -25px;
+    width: 125px;
+    height: 109px;
+}
+.moon5 {
+    background: url('../img/moonphases.jpg') no-repeat -600px -25px;
+    width: 125px;
+    height: 109px;
+}
+.moon6 {
+    background: url('../img/moonphases.jpg') no-repeat -720px -25px;
+    width: 125px;
+    height: 109px;
+}
+.moon7 {
+    background: url('../img/moonphases.jpg') no-repeat -1px -168px;
+    width: 125px;
+    height: 109px;
+}
+.moon8 {
+    background: url('../img/moonphases.jpg') no-repeat -120px -168px;
+    width: 125px;
+    height: 109px;
+}
+.moon9 {
+    background: url('../img/moonphases.jpg') no-repeat -240px -168px;
+    width: 125px;
+    height: 109px;
+}
+.moon10 {
+    background: url('../img/moonphases.jpg') no-repeat -360px -168px;
+    width: 125px;
+    height: 109px;
+}
+.moon11 {
+    background: url('../img/moonphases.jpg') no-repeat -480px -168px;
+    width: 125px;
+    height: 109px;
+}
+.moon12 {
+    background: url('../img/moonphases.jpg') no-repeat -600px -168px;
+    width: 125px;
+    height: 109px;
+}
+.moon13 {
+    background: url('../img/moonphases.jpg') no-repeat -720px -168px;
+    width: 125px;
+    height: 109px;
+}
+.moon14 {
+    background: url('../img/moonphases.jpg') no-repeat -1px -305px;
+    width: 125px;
+    height: 109px;
+}
+.moon15 {
+    background: url('../img/moonphases.jpg') no-repeat -120px -305px;
+    width: 125px;
+    height: 109px;
+}
+.moon16 {
+    background: url('../img/moonphases.jpg') no-repeat -240px -305px;
+    width: 125px;
+    height: 109px;
+}
+.moon17 {
+    background: url('../img/moonphases.jpg') no-repeat -360px -305px;
+    width: 125px;
+    height: 109px;
+}
+.moon18 {
+    background: url('../img/moonphases.jpg') no-repeat -480px -305px;
+    width: 125px;
+    height: 109px;
+}
+.moon19 {
+    background: url('../img/moonphases.jpg') no-repeat -600px -305px;
+    width: 125px;
+    height: 109px;
+}
+.moon20 {
+    background: url('../img/moonphases.jpg') no-repeat -720px -305px;
+    width: 125px;
+    height: 109px;
+}
+.moon21 {
+    background: url('../img/moonphases.jpg') no-repeat -1px -305px;
+    width: 125px;
+    height: 109px;
+}
+.moon22 {
+    background: url('../img/moonphases.jpg') no-repeat -120px -305px;
+    width: 125px;
+    height: 109px;
+}
+.moon23 {
+    background: url('../img/moonphases.jpg') no-repeat -240px -305px;
+    width: 125px;
+    height: 109px;
+}
+.moon24 {
+    background: url('../img/moonphases.jpg') no-repeat -360px -305px;
+    width: 125px;
+    height: 109px;
+}
+.moon25 {
+    background: url('../img/moonphases.jpg') no-repeat -480px -305px;
+    width: 125px;
+    height: 109px;
+}
+.moon26 {
+    background: url('../img/moonphases.jpg') no-repeat -600px -305px;
+    width: 125px;
+    height: 109px;
+}
+.moon27 {
+    background: url('../img/moonphases.jpg') no-repeat -720px -305px;
+    width: 125px;
+    height: 109px;
+}
+
+.eveningSky{
+    background: #8cdaf2; /* Old browsers */
+    background: -moz-radial-gradient(center, ellipse cover,  #8cdaf2 46%, #f1da36 76%, #e06733 99%); /* FF3.6+ */
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(46%,#8cdaf2), color-stop(76%,#f1da36), color-stop(99%,#e06733)); /* Chrome,Safari4+ */
+    background: -webkit-radial-gradient(center, ellipse cover,  #8cdaf2 46%,#f1da36 76%,#e06733 99%); /* Chrome10+,Safari5.1+ */
+    background: -o-radial-gradient(center, ellipse cover,  #8cdaf2 46%,#f1da36 76%,#e06733 99%); /* Opera 12+ */
+    background: -ms-radial-gradient(center, ellipse cover,  #8cdaf2 46%,#f1da36 76%,#e06733 99%); /* IE10+ */
+    background: radial-gradient(ellipse at center,  #8cdaf2 46%,#f1da36 76%,#e06733 99%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8cdaf2', endColorstr='#e06733',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.nightSky{
+    background: rgb(19, 37, 53);
+}
+
+.daySky{
+    background: #C4DDF2;
+}
+
+.ui-rotatable-handle {
+    height: 50x;
+    width: 50px;
+    cursor: pointer;
+    background-image: url(../img/rotate.jpeg);
+    background-size: 100%;
+    left: 2px;
+    bottom: 2px;
+}

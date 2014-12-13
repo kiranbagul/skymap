@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Lunar phases calculation">
+    <meta name="author" content="Kiran Bagul">
+
+    <title>Solar system locator</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/ripples.min.css" rel="stylesheet">
+    <link href="css/material-wfont.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/jquery-ui.min.css" rel="stylesheet">
+
+    <script src="js/jquery-1.11.0.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/ripples.min.js"></script>
+    <script src="js/material.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/jquery-ui-timepicker-addon.js"></script>
+    <script src="js/bonsai-0.4.0.min.js"></script>
+    <script src="js/jquery.ui.rotatable.min.js"></script>
+    <script src="js/SolarBody.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<div class="container">
+    <div class="row">
+        <div class="panel panel-primary">
+
+            <div class="panel-heading">
+                <h1 class="panel-title">Solar system locator</h1>
+            </div>
+            <div class="panel-body">
+                <div id="dateSelector" class="col-md-4">
+                    <p class="bs-component">
+                        <input class="form-control datepicker" type="text" placeholder="Select Date">
+                    </p>
+                </div>
+            </div>
+            <div class="panel-body" id="sundial">
+                <div id="canvas"></div>
+                <div id="content">
+                    <div id="sky"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+<script type="application/javascript">
+    var datePicker;
+    var map;
+    var size = 700;
+    $(document).ready(function () {
+        $('#content').height(size);
+        $('#content').width(size);
+        $('#content').rotatable();
+        $.material.init();
+        $("#sky").height(size);
+        $("#sky").width(size);
+        $("#sky").css({'borderRadius': size / 2});
+        var player = document.getElementById('sky');
+        map = bonsai.run(player, {
+            url: "js/SkyMap.js"
+        });
+        var datePicker = $('.datepicker');
+        datePicker.datetimepicker({
+            timeFormat: 'hh:mm tt z',
+            onSelect: function (selectedDateTime) {
+                selectedDateTime = new Date(selectedDateTime);
+                console.log(selectedDateTime);
+                init(selectedDateTime);
+            }
+        });
+        map.on('load', function () {
+            init(new Date());
+        });
+    });
+
+    function init(date) {
+        var stellerData = Planets.getPositions(date, "18.52", "73.85");
+        console.log(stellerData);
+        var className = "daySky";
+        if (stellerData.Sun.alt < 0) {
+            className = "nightSky"
+        }
+        var prevClass = $('#sky').attr('class');
+        if (prevClass != className) {
+            $("#sky").switchClass(prevClass, className, 1000);
+        }
+        map.sendMessage({
+            "planets": stellerData,
+            'size': size
+        });
+    }
+</script>
+
+</html>
