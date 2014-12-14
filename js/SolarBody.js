@@ -230,6 +230,13 @@ var orbitalElements = {
 var Planets = function () {
 };
 
+Planets.getMoonPhase = function (now) {
+    var lp = 2551443;
+    var new_moon = new Date(1970, 0, 7, 20, 35, 0);
+    var phase = ((now.getTime() - new_moon.getTime()) / 1000) % lp;
+    return Math.floor(phase / (24 * 3600)) + 1;
+};
+
 Planets.getMoonPosition = function (date, lat, lng) {
     var jd = TimeUtils.toDays(date);
     var L = (218.316 + 13.176396 * jd) * Geometry.DEGREES_TO_RADIANS,
@@ -245,12 +252,12 @@ Planets.getMoonPosition = function (date, lat, lng) {
     var h = Planets.altitude(ha, phi, dec);
     h = h + Geometry.DEGREES_TO_RADIANS * 0.017 / Math.tan(h + Geometry.DEGREES_TO_RADIANS * 10.26 / (h + Geometry.DEGREES_TO_RADIANS * 5.10));
     h = h * Geometry.RADIANS_TO_DEGREES;
-    console.log(h);
     return {
         "az": (Planets.azimuth(ha, phi, dec) * Geometry.RADIANS_TO_DEGREES) + 180,
         "alt": h
     };
 };
+
 
 Planets.altitude = function (H, phi, dec) {
     return Math.asin(Math.sin(phi) * Math.sin(dec) + Math.cos(phi) * Math.cos(dec) * Math.cos(H));
@@ -303,6 +310,8 @@ Planets.getPositions = function (date, lat, long) {
     var uranus = Planets._calculatePlanetPosition(jc, orbitalElements.Uranus);
     var neptune = Planets._calculatePlanetPosition(jc, orbitalElements.Neptune);
     var earth = Planets._calculatePlanetPosition(jc, orbitalElements.Earth);
+    var moonInfo = Planets.getMoonPosition(date, lat, long);
+    moonInfo.phase = Planets.getMoonPhase(date);
 
     return {
         "Sun": Planets.calculateRelativePositions({'x': 0, 'y': 0, 'z': 0}, earth, lat, long, date),
@@ -313,7 +322,7 @@ Planets.getPositions = function (date, lat, long) {
         "Saturn": Planets.calculateRelativePositions(saturn, earth, lat, long, date),
         "Uranus": Planets.calculateRelativePositions(uranus, earth, lat, long, date),
         "Neptune": Planets.calculateRelativePositions(neptune, earth, lat, long, date),
-        "Moon": Planets.getMoonPosition(date, lat, long)
+        "Moon": moonInfo
     };
 };
 

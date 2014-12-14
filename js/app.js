@@ -1,10 +1,11 @@
 var map, size;
 var currentDateTime;
-var speedLabel;
+var latitude = "18.52", longitude = "73.85";
 
 $(document).ready(function () {
     $.material.init();
     initCanvasSize();
+    initLocation();
     speedlabel = $("#speedlabel");
     var player = document.getElementById('sky');
     map = bonsai.run(player, {
@@ -27,6 +28,9 @@ $(document).ready(function () {
 function initCanvasSize() {
     size = $("#parentContainer").width();
     size = size * 0.8;
+    if (size > 600) {
+        size = 600;
+    }
     $('#content').height(size);
     $('#content').width(size);
     $('#content').rotatable();
@@ -38,7 +42,7 @@ function initCanvasSize() {
 function init(date) {
     currentDateTime = date;
     $("#timeDisplay").text(date);
-    var stellerData = Planets.getPositions(date, "18.52", "73.85");
+    var stellerData = Planets.getPositions(date, latitude, longitude);
     var className = "daySky";
     if (stellerData.Sun.alt < 0) {
         className = "nightSky"
@@ -123,14 +127,14 @@ var Clock = {
         return this._isPaused;
     },
 
-    getSpeedLabel : function(){
-        if(this._isPaused){
+    getSpeedLabel: function () {
+        if (this._isPaused) {
             return "0x";
         }
-        if(this._isFwd) {
+        if (this._isFwd) {
             return this.currentSecPerInterval + "x";
-        }else{
-            return "-"+this.currentSecPerInterval + "x";
+        } else {
+            return "-" + this.currentSecPerInterval + "x";
         }
     }
 };
@@ -157,4 +161,42 @@ function initTimeMachine() {
         Clock.backward();
         speedlabel.text(Clock.getSpeedLabel());
     });
+}
+
+function initLocation() {
+    if (geoPosition.init()) {
+        geoPosition.getCurrentPosition(success_callback, error_callback, {enableHighAccuracy: true});
+    }
+
+    function success_callback(p) {
+        latitude = p.coords.latitude+"";
+        longitude = p.coords.longitude+"";
+        //$("#longitude").val(longitude);
+        //$("#latitude").val(latitude);
+    }
+
+    function error_callback(p) {
+        alert("Error retrieving geo location.");
+    }
+
+    $("#lat_long_submit").click(function () {
+        var lng = $("#longitude").val();
+        var lat = $("#latitude").val();
+        latitude = lat+"";
+        longitude = lng+"";
+        //var reg = new RegExp("^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?),\s*[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$");
+        //if (reg.exec(lat)) {
+        //    latitude = lat+"";
+        //} else {
+        //    alert("Invalid Coordinates.");
+        //}
+        //
+        //if (reg.exec(lng)) {
+        //    longitude = lng+"";
+        //} else {
+        //    alert("Invalid Coordinates.");
+        //}
+    });
+    $("#longitude").val(longitude);
+    $("#latitude").val(latitude);
 }
