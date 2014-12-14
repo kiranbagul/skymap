@@ -8,6 +8,29 @@ var sun = new Bitmap('../img/sun1.png').on('load', function () {
 var moon = new Bitmap('../img/moon.png').on('load', function () {
     this.addTo(stage);
 });
+
+var moonDisplay = new Group();
+moonDisplay.addTo(stage);
+var moon0 = initMoonPhase('../img/moon0.png');
+var moon1 = initMoonPhase('../img/moon1.png');
+var moon2 = initMoonPhase('../img/moon2.png');
+var moon3 = initMoonPhase('../img/moon3.png');
+var moon4 = initMoonPhase('../img/moon4.png');
+var moon5 = initMoonPhase('../img/moon5.png');
+var moon6 = initMoonPhase('../img/moon6.png');
+var moon7 = initMoonPhase('../img/moon7.png');
+
+function initMoonPhase(src) {
+    var moonPhase = new Bitmap(src);
+    moonPhase.attr({
+        width: 20,
+        height: 20,
+        "rotation":Math.PI/2
+    });
+
+    return moonPhase;
+}
+
 var mercury = initPlanet("Mercury");
 var venus = initPlanet("Venus");
 var mars = initPlanet("Mars");
@@ -28,7 +51,7 @@ stage.on('message', function (data) {
     planets = data.planets;
     init();
     drawsun(planets.Sun.alt, planets.Sun.az);
-    drawmoon(planets.Moon.alt, planets.Moon.az);
+    refreshMoon(planets.Moon.alt, planets.Moon.az, planets.Moon.phase, planets.Sun.az);
     refreshPlanet(mercury, planets.Mercury.alt, planets.Mercury.az);
     refreshPlanet(venus, planets.Venus.alt, planets.Venus.az);
     refreshPlanet(mars, planets.Mars.alt, planets.Mars.az);
@@ -155,7 +178,46 @@ function drawsun(r, t) {
     sun.rad = r;
 }
 
-function drawmoon(r, t) {
+var moonPhaseActive;
+moonDisplay.rotation = 0;
+function refreshMoon(r, t, p, sp) {
+    var pos = getXY(r, t);
+    var rotation = sp;
+    moonDisplay.removeChild(moonPhaseActive);
+    if (p == 1) {
+        moonPhaseActive = moon0;
+    } else if (p == 15 || p == 14) {
+        moonPhaseActive = moon4;
+    } else if (p == 2 || p == 3 || p == 4 || p == 5) {
+        moonPhaseActive = moon1;
+    } else if (p == 6 || p == 7 || p == 8 || p == 9) {
+        moonPhaseActive = moon2;
+    } else if (p == 10 || p == 11 || p == 12 || p == 13) {
+        moonPhaseActive = moon3;
+    } else if (p == 16 || p == 17 || p == 18 || p == 19 || p == 20) {
+        moonPhaseActive = moon5;
+    } else if (p == 21 || p == 22 || p == 23 || p == 24 || p == 25) {
+        moonPhaseActive = moon6;
+    } else if (p == 26 || p == 27 || p == 28 || p == 29 || p == 30) {
+        moonPhaseActive = moon7;
+    }
+    moonPhaseActive.addTo(moonDisplay);
+    if (r < 0 && moonDisplay.rad < 0) {
+        moonDisplay.attr({
+            x: pos.x,
+            y: pos.y
+        });
+    } else {
+        var aAnim = new Animation('1s', {
+            x: pos.x,
+            y: pos.y
+        });
+        moonDisplay.animate(aAnim);
+    }
+    moonDisplay.rad = r;
+}
+
+function drawmoon(r, t, p) {
     var pos = getXY(r, t);
     if (r < 0 && moon.rad < 0) {
         moon.attr({
