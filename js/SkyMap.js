@@ -56,13 +56,13 @@ function addLabels() {
     addTextToPosition(n, pos.x - 5, pos.y);
     var s = new Text("S");
     pos = getXY(0, 180);
-    addTextToPosition(s, pos.x -5, pos.y - 13);
+    addTextToPosition(s, pos.x - 5, pos.y - 13);
     var e = new Text("W");
     pos = getXY(0, 270);
-    addTextToPosition(e, pos.x, pos.y -5);
+    addTextToPosition(e, pos.x, pos.y - 5);
     var w = new Text("E");
     pos = getXY(0, 90);
-    addTextToPosition(w, pos.x - 13, pos.y -5);
+    addTextToPosition(w, pos.x - 13, pos.y - 5);
     add(5, "yellow", 0, 45);
     add(5, "yellow", 0, 135);
     add(5, "yellow", 0, 225);
@@ -123,12 +123,12 @@ function initPlanet(name) {
 
 function refreshPlanet(container, r, t) {
     var pos = getXY(r, t);
-    if(r < 0 && container.rad < 0){
-        container.attr( {
+    if (r < 0 && container.rad < 0) {
+        container.attr({
             x: pos.x,
             y: pos.y
         });
-    }else {
+    } else {
         var aAnim = new Animation('1s', {
             x: pos.x,
             y: pos.y
@@ -140,12 +140,12 @@ function refreshPlanet(container, r, t) {
 
 function drawsun(r, t) {
     var pos = getXY(r, t);
-    if(r < 0 && sun.rad < 0){
-        sun.attr( {
-            x: pos.x,
-            y: pos.y
+    if (r < -20 && sun.rad < -20) {
+        sun.attr({
+            x: pos.x - 107,
+            y: pos.y - 107
         });
-    }else {
+    } else {
         var aAnim = new Animation('1s', {
             x: pos.x - 107,
             y: pos.y - 107
@@ -157,12 +157,12 @@ function drawsun(r, t) {
 
 function drawmoon(r, t) {
     var pos = getXY(r, t);
-    if(r < 0 && moon.rad < 0){
-        moon.attr( {
+    if (r < 0 && moon.rad < 0) {
+        moon.attr({
             x: pos.x,
             y: pos.y
         });
-    }else {
+    } else {
         var aAnim = new Animation('1s', {
             x: pos.x,
             y: pos.y,
