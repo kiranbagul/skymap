@@ -26,6 +26,7 @@
     <script src="js/bonsai-0.4.0.min.js"></script>
     <script src="js/jquery.ui.rotatable.min.js"></script>
     <script src="js/SolarBody.js"></script>
+    <script src="js/app.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -38,13 +39,21 @@
 <body>
 <div class="container">
     <div class="row">
-        <div class="panel panel-primary">
-
+        <div id="parentContainer" class="panel panel-success">
             <div class="panel-heading">
-                <h1 class="panel-title">Solar system locator</h1>
+                <h2 class="panel-title">Solar system locator</h2>
             </div>
             <div class="panel-body">
-                <div id="dateSelector" class="col-md-4">
+                <div id="timemachine" class="col-md-6">
+                    <h4 id="timeDisplay"></h4>
+                    <h4 id="speedlabel" class="label label-primary"></h4>
+                    <div class="timeBtnContainer">
+                        <div id="time_back" class="btn btn-default timeBackBtn">Backward</div>
+                        <div id="time_play" class="btn btn-default timePauseBtn">Play</div>
+                        <div id="time_fwd" class="btn  btn-default timeFwdBtn">Forward</div>
+                    </div>
+                </div>
+                <div id="dateSelector" class="col-md-6">
                     <p class="bs-component">
                         <input class="form-control datepicker" type="text" placeholder="Select Date">
                     </p>
@@ -60,53 +69,4 @@
     </div>
 </div>
 </body>
-
-<script type="application/javascript">
-    var datePicker;
-    var map;
-    var size = 700;
-    $(document).ready(function () {
-        $('#content').height(size);
-        $('#content').width(size);
-        $('#content').rotatable();
-        $.material.init();
-        $("#sky").height(size);
-        $("#sky").width(size);
-        $("#sky").css({'borderRadius': size / 2});
-        var player = document.getElementById('sky');
-        map = bonsai.run(player, {
-            url: "js/SkyMap.js"
-        });
-        var datePicker = $('.datepicker');
-        datePicker.datetimepicker({
-            timeFormat: 'hh:mm tt z',
-            onSelect: function (selectedDateTime) {
-                selectedDateTime = new Date(selectedDateTime);
-                console.log(selectedDateTime);
-                init(selectedDateTime);
-            }
-        });
-        map.on('load', function () {
-            init(new Date());
-        });
-    });
-
-    function init(date) {
-        var stellerData = Planets.getPositions(date, "18.52", "73.85");
-        console.log(stellerData);
-        var className = "daySky";
-        if (stellerData.Sun.alt < 0) {
-            className = "nightSky"
-        }
-        var prevClass = $('#sky').attr('class');
-        if (prevClass != className) {
-            $("#sky").switchClass(prevClass, className, 1000);
-        }
-        map.sendMessage({
-            "planets": stellerData,
-            'size': size
-        });
-    }
-</script>
-
 </html>
