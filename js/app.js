@@ -171,6 +171,8 @@ function initLocation() {
     function success_callback(p) {
         latitude = p.coords.latitude+"";
         longitude = p.coords.longitude+"";
+        latitude = latitude.substring(0,5);
+        longitude = longitude.substring(0,5);
         //$("#longitude").val(longitude);
         //$("#latitude").val(latitude);
     }
